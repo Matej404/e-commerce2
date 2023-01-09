@@ -17,6 +17,7 @@
   "homepage": "https://github.com/Matej404/e-commerce2#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "pg": "^8.8.0",
     "swagger-jsdoc": "^6.2.7",
     "swagger-ui-express": "^4.6.0"
   },
