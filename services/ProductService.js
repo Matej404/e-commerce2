@@ -52,7 +52,7 @@ module.exports = class ProductService {
         }
     }
 
-    async removeItem(productId) {
+    async removeProduct(productId) {
         try {
           const cartItem = await ProductModuleInstance.delete(productId);
     

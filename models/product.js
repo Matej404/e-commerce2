@@ -77,7 +77,7 @@ module.exports = class ProductModule {
         }
     }
 
-    static async delete(id) {
+    async delete(id) {
         try {
           const statement = `DELETE
                              FROM "product"

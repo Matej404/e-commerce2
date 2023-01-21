@@ -2,9 +2,48 @@ const client = require('../databasepg');
 const pgp = require('pg-promise')({ capSQL: true });
 
 module.exports = class UserModel {
+    async find(options = {}) {
+        try {
+            const statement = `SELECT *
+                               FROM user`;
+    
+            const values = [];
+    
+            const result = await client.query(statement, values);
+    
+            if(result.rows?.length) {
+                return result.rows;
+            }
+            return [];
+        } catch(err) {
+            throw(err)
+        }
+    }
+
+    async findOneById(id) {
+        try {
+            const statement = `SELECT * 
+                               FROM users 
+                               WHERE id = $1`;
+
+            const values = [id];
+
+            const result = await client.query(statement, values);
+
+            if(result.rows?.length) {
+                return result.rows[0];
+            }
+            return null;
+        } catch(err) {
+            throw new Error(err);
+        }
+    }
+
     async create(data) {
         try {
-            const statement = pgp.helpers.insert(data, null, 'users') + 'RETURNING *';
+            const {userId} = data;
+
+            const statement = pgp.helpers.insert(userId, null, 'users') + 'RETURNING *';
             const result = await client.query(statement);
 
             if(result.rows?.length) {
@@ -52,22 +91,24 @@ module.exports = class UserModel {
         }
     }
 
-    async findOneById(id) {
+     async delete(id) {
         try {
-            const statement = `SELECT * 
-                               FROM users 
-                               WHERE id = $1`;
-
-            const values = [id];
-
-            const result = client(statement, values);
-
-            if(result.rows?.length) {
-                return result.rows[0];
-            }
-            return null;
+          const statement = `DELETE
+                             FROM "user"
+                             WHERE id = $1
+                             RETURNING *`;
+          const values = [id];
+      
+          const result = await db.query(statement, values);
+    
+          if (result.rows?.length) {
+            return result.rows[0];
+          }
+    
+          return null;
+    
         } catch(err) {
-            throw new Error(err);
+          throw new Error(err);
         }
-    }
+      }
 }

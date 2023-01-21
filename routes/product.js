@@ -57,9 +57,9 @@ module.exports = (app) => {
 
     router.delete('/:prodictId', async(req, res, next) => {
         try {
-            const { cartItemId } = req.params;
+            const { productId } = req.params;
     
-            const response = await ProductServiceInstance.removeItem(cartItemId);
+            const response = await ProductServiceInstance.removeProduct(productId);
 
             res.status(200).send(response);
         } catch(err) {
