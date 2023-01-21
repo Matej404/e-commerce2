@@ -1,4 +1,5 @@
 const client = require('../databasepg');
+const pgp = require('pg-promise');
 
 module.exports = class ProductModule {
     
@@ -25,7 +26,7 @@ module.exports = class ProductModule {
         try {
             const statement = `SELECT *
                                 FROM product
-                                WHERE product_id = $1`;
+                                WHERE id = $1`;
 
             const values = [id];
 
@@ -40,6 +41,60 @@ module.exports = class ProductModule {
             } catch(err) {
                 throw(err);
             }
-
     }
+
+    async create(data) {
+        try {
+            const {productId} = data; 
+
+            const statement = pgp.helpers.insert(productId, null, 'product') + 'RETURNING *';
+            const result = await client.query(statement);
+
+            if(result.rows?.length) {
+                return result.rows[0];
+            }
+            return null;
+        } catch(err) {
+            throw new Error(err);
+        }
+    }
+
+
+    async update(data) {
+        try {
+            const {id, ...params} = data;
+
+            const condition = pgp.as.format('WHERE id = ${id} RETURNING *', {id});
+            const statement = pgp.helpers.update(params, null, 'product') + condition;
+            const result = await client.query(statement);
+
+            if(result.rows?.length) {
+                return result.rows[0];
+            }
+            return null;
+        } catch(err) {
+            throw new Error(err);
+        }
+    }
+
+    static async delete(id) {
+        try {
+          const statement = `DELETE
+                             FROM "product"
+                             WHERE id = $1
+                             RETURNING *`;
+          const values = [id];
+      
+          const result = await db.query(statement, values);
+    
+          if (result.rows?.length) {
+            return result.rows[0];
+          }
+    
+          return null;
+    
+        } catch(err) {
+          throw new Error(err);
+        }
+      }
 }

@@ -19,7 +19,9 @@ module.exports = class UserService {
 
     async update(data) {
         try {
-            const user = UserModelInstance.update(data);
+            const user = await UserModelInstance.update(data);
+
+            return user;
         } catch(err) {
             throw err;
         }

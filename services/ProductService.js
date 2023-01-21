@@ -28,6 +28,38 @@ module.exports = class ProductService {
         } catch(err) {
             throw(err);
         }
-
     }
-}
+
+    async create(data) {
+        const { productId } = data;
+
+        try {
+            const product = await ProductModuleInstance.create(productId);
+
+            return product;
+        } catch(err) {
+            throw(err);
+        }
+    }
+
+    async update(data) {
+        try {
+            const product = await ProductModuleInstance.update(data);
+            
+            return product;
+        } catch(err) {
+            next(err);
+        }
+    }
+
+    async removeItem(productId) {
+        try {
+          const cartItem = await ProductModuleInstance.delete(productId);
+    
+          return cartItem;
+    
+        } catch(err) {
+          throw err;
+        }
+      }
+ }
