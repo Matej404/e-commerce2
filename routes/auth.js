@@ -12,7 +12,7 @@ module.exports = (app) => {
       const data = req.body;
 
 
-      const response = await AuthServiceInstance.create(data);
+      const response = await AuthServiceInstance.register(data);
       res.status(201).send(response);
     } catch(err) {
       next(err);

@@ -1,11 +1,11 @@
 const createError = require('http-errors');
-const ProductModule = require('../models/product');
-const ProductModuleInstance = new ProductModule();
+const ProductModel = require('../models/product');
+const ProductModelInstance = new ProductModel();
 
 module.exports = class ProductService {
     async list(options) {
         try {
-            const products = await ProductModuleInstance.find(options);
+            const products = await ProductModelInstance.find(options);
 
             return products;
 
@@ -17,7 +17,7 @@ module.exports = class ProductService {
 
     async get(id) {
         try {
-            const product = await ProductModuleInstance.findOne(id);
+            const product = await ProductModelInstance.findOne(id);
 
             if(!product) {
                 return createError(404, 'Product not found');
@@ -34,7 +34,7 @@ module.exports = class ProductService {
         const { productId } = data;
 
         try {
-            const product = await ProductModuleInstance.create(productId);
+            const product = await ProductModelInstance.create(productId);
 
             return product;
         } catch(err) {
@@ -44,7 +44,7 @@ module.exports = class ProductService {
 
     async update(data) {
         try {
-            const product = await ProductModuleInstance.update(data);
+            const product = await ProductModelInstance.update(data);
             
             return product;
         } catch(err) {
@@ -54,7 +54,7 @@ module.exports = class ProductService {
 
     async removeProduct(productId) {
         try {
-          const cartItem = await ProductModuleInstance.delete(productId);
+          const cartItem = await ProductModelInstance.delete(productId);
     
           return cartItem;
     

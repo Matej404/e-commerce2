@@ -1,7 +1,7 @@
 const client = require('../databasepg');
 const pgp = require('pg-promise');
 
-module.exports = class cartItemModule {
+module.exports = class cartItemModel {
     async find(cartId) {
         try {
             const statement = `SELECT 

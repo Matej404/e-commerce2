@@ -29,18 +29,6 @@ module.exports = class UserService {
         }
     }
 
-    async create(data) {
-        const {userId} = data;
-
-        try {
-            const user = await UserModelInstance.create(userId);
-
-            return userId;
-            
-        } catch(err) {
-            throw err;
-        }
-    }
 
     async update(data) {
         try {

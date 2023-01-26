@@ -29,18 +29,6 @@ module.exports = (app) => {
         }
     })
 
-    router.post('/', async(req, res, next) => {
-        try {
-            const {userId} = req.user;
-
-            const response = await UserServiceInstance.create(userId);
-
-            res.status(200).send(response)
-        } catch(err) {
-            next(err);
-        }
-    })
-
     router.put('/:userId', async(req, res, next) => {
         try {
             const {userId} = req.params;
