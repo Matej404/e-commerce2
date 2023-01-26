@@ -1,0 +1,28 @@
+{
+  "name": "e-commerce2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matej404/e-commerce2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matej404/e-commerce2/issues"
+  },
+  "homepage": "https://github.com/Matej404/e-commerce2#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "moment": "^2.29.4",
+    "pg": "^8.8.0",
+    "pg-promise": "^11.0.2",
+    "swagger-jsdoc": "^6.2.7",
+    "swagger-ui-express": "^4.6.0"
+  },
+  "description": ""
+}
