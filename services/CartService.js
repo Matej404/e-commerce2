@@ -53,9 +53,9 @@ module.exports = class CartService {
         }
     }
 
-    async removeItem(createItemId, data) {
+    async removeItem(cartItemId) {
         try {
-            const cartItem = await CartItemModelInstance.delete(createItemId, data);
+            const cartItem = await CartItemModelInstance.delete(cartItemId);
             return cartItem;
         } catch(err) {
             throw err;

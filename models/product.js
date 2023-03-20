@@ -85,7 +85,7 @@ module.exports = class ProductModel {
                              RETURNING *`;
           const values = [id];
       
-          const result = await db.query(statement, values);
+          const result = await client.query(statement, values);
     
           if (result.rows?.length) {
             return result.rows[0];
