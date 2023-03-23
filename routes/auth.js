@@ -3,9 +3,9 @@ const router = express.Router();
 const AuthService = require('../services/AuthService');
 const AuthServiceInstance = new AuthService();
 
-module.exports = (app) => {
+module.exports = (app, passport) => {
 
-  app.use('/users', router);
+  app.use('/auth', router);
 
   router.post('/register', async (req, res, next) => {
     try {
@@ -19,3 +19,16 @@ module.exports = (app) => {
     }
   });
 }
+
+
+router.post('/login', passport.authenticate('local'), async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+  
+    const response = await AuthServiceInstance.login({ email: username, password});
+  
+    res.status(200).send(response);
+  } catch(err) {
+    next(err);
+  }
+});
