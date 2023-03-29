@@ -103,7 +103,7 @@ module.exports = (app) => {
      *         content:
      *           application/json:
      *             schema:
-     *               $ref: '#/components/schemas/Cart'
+     *               $ref: '#/components/schemas/Item'
      *       400:
      *         description: Bad request
      *       401:
