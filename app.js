@@ -1,14 +1,11 @@
+// Instantiate express server
 const express = require('express');
 const app = express();
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.js');
 
+// Configure swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./spec/swagger.js');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
-});
+// Listen on port 3000
+app.listen(3000, () => {  console.log('Express server running on port 3000!') });
