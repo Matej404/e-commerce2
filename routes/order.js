@@ -8,10 +8,10 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /mine:
+     * /order:
      *   get:
      *     tags:
-     *       - Cart
+     *       - Order
      *     summary: Retrieve the user's order list
      *     description: Loads the order list for the currently authenticated user
      *     security:
@@ -44,7 +44,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /:orderId:
+     * order/:orderId:
      *   get:
      *     tags:
      *       - Order

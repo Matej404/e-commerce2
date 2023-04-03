@@ -23,7 +23,7 @@ module.exports = (app) => {
      *         content:
      *           application/json:
      *             schema:
-     *               $ref: '#/components/schemas/Products'
+     *               $ref: '#/components/schemas/Product'
      *       400:
      *         description: Bad request
      *       401:
@@ -59,7 +59,7 @@ module.exports = (app) => {
      *         content:
      *           application/json:
      *             schema:
-     *               $ref: '#/components/schemas/Products'
+     *               $ref: '#/components/schemas/Product'
      *       400:
      *         description: Bad request
      *       401:
@@ -82,7 +82,7 @@ module.exports = (app) => {
     /**
      * @openapi
      * /:
-     *   get:
+     *   post:
      *     tags:
      *       - Product
      *     summary: Create a new product
@@ -95,7 +95,7 @@ module.exports = (app) => {
      *         content:
      *           application/json:
      *             schema:
-     *               $ref: '#/components/schemas/Products'
+     *               $ref: '#/components/schemas/Product'
      *       400:
      *         description: Bad request
      *       401:
@@ -119,7 +119,7 @@ module.exports = (app) => {
     /**
      * @openapi
      * /:productId:
-     *   get:
+     *   put:
      *     tags:
      *       - Product
      *     summary: Update a product
@@ -155,7 +155,7 @@ module.exports = (app) => {
     /**
      * @openapi
      * /:productId:
-     *   get:
+     *   delete:
      *     tags:
      *       - Product
      *     summary: Delete a product
@@ -168,7 +168,7 @@ module.exports = (app) => {
      *         content:
      *           application/json:
      *             schema:
-     *               $ref: '#/components/schemas/Products'
+     *               $ref: '#/components/schemas/Product'
      *       400:
      *         description: Bad request
      *       401:
