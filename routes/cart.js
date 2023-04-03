@@ -125,7 +125,7 @@ module.exports = (app) => {
     })
 
 
-            /**
+    /**
      * @openapi
      * /mine/item/cartItemId:
      *   put:
@@ -169,7 +169,7 @@ module.exports = (app) => {
     })
 
 
-            /**
+    /**
      * @openapi
      * /mine/item/createItemId:
      *   delete:

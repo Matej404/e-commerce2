@@ -29,4 +29,21 @@ module.exports = {
     },
     required: ["id", "items"],
   },
+  Order: {
+    type: "object",
+    properties: {
+      id: {
+        type: "string",
+        description: "The unique identifier of the order",
+      },
+      items: {
+        type: "array",
+        description: "An array of items in the order",
+        items: {
+          $ref: "#/components/schemas/Item",
+        },
+      },
+    },
+    required: ["id", "items"],
+  },
 };
