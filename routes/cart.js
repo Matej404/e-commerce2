@@ -124,6 +124,38 @@ module.exports = (app) => {
         }
     })
 
+
+    /**
+     * @openapi
+     * /mine/item/cartItemId:
+     *   put:
+     *     tags:
+     *       - Cart
+     *     summary: Updates an item in the user's cart
+     *     description: Updates an item in the cart of the currently authenticated user
+     *     security:
+     *       - BearerAuth: []
+     *     requestBody:
+     *       description: The item to be updated in the cart
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/Item'
+     *     responses:
+     *       200:
+     *         description: Successfully updated the item in the user's cart
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Item'
+     *       400:
+     *         description: Bad request
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Internal server error
+     */
     router.put('/mine/item/cartItemId', async (req, res, next) => {
         try {
             const { cartItemId } = req.params;
@@ -136,6 +168,38 @@ module.exports = (app) => {
         }
     })
 
+
+    /**
+     * @openapi
+     * /mine/item/createItemId:
+     *   delete:
+     *     tags:
+     *       - Cart
+     *     summary: Delete an item from the user's cart
+     *     description: Deletes an item from the cart of the currently authenticated user
+     *     security:
+     *       - BearerAuth: []
+     *     requestBody:
+     *       description: The item to be deleted from the cart
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/Item'
+     *     responses:
+     *       200:
+     *         description: Successfully deleted the item from the user's cart
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Item'
+     *       400:
+     *         description: Bad request
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Internal server error
+     */
     router.delete('/mine/item/createItemId', async (req, res, next) => {
         try {
             const { createItemId } = req.params;
