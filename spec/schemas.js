@@ -62,5 +62,23 @@ module.exports = {
         description: 'The email address of the user'
       }
     }
+  },
+  Product: {
+    type: 'object',
+    properties: {
+      id: {
+        type: 'integer',
+        description: 'The unike identifier for the product'
+      },
+      name: {
+        type: 'string',
+        description: 'The name of the product'
+      }, 
+      price: {
+        type: 'number',
+        format: 'float',
+        description: 'The price of the product in GBP'
+      }
+    }
   }
 };

@@ -47,7 +47,7 @@ module.exports = (app) => {
      * /:orderId:
      *   get:
      *     tags:
-     *       - Order
+     *       - User
      *     summary: Retrieve the user from the list
      *     description: Loads the user from the list
      *     security:
