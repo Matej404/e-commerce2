@@ -46,4 +46,21 @@ module.exports = {
     },
     required: ["id", "items"],
   },
+  User: {
+    type: 'object',
+    properties: {
+      id: {
+        type: 'integer',
+        description: 'The unique identifier for the user'
+      },
+      name: {
+        type: 'string',
+        description: 'The name of the user'
+      },
+      email: {
+        type: 'string',
+        description: 'The email address of the user'
+      }
+    }
+  }
 };

@@ -121,14 +121,14 @@ module.exports = (app) => {
         }
     })
 
-        /**
+    /**
      * @openapi
      * /:orderId:
      *   put:
      *     tags:
      *       - Order
      *     summary: Updates an item in the user's order list
-     *     description: Updates an item in the order list of the currently authenticated user
+     *     description: Updates an item in the user's order list
      *     security:
      *       - BearerAuth: []
      *     requestBody:
@@ -165,7 +165,7 @@ module.exports = (app) => {
         }
     })
 
-        /**
+    /**
      * @openapi
      * /:orderItemId:
      *   delete:

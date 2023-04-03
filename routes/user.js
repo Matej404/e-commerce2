@@ -7,6 +7,30 @@ const UserServiceInstance = new UserService;
 module.exports = (app) => {
     app.use('/users', router);
 
+    /**
+     * @openapi
+     * /:
+     *   get:
+     *     tags:
+     *       - User
+     *     summary: Retrieves a list of users
+     *     description: Returns a list of users that match the specified page number and page size parameters
+     *     security:
+     *       - BearerAuth: []
+     *     responses:
+     *       200:
+     *         description: Successfully retrieved a list of users
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/User'
+     *       400:
+     *         description: Bad request
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Internal server error
+     */
     router.get('/', async(req, res, next) => {
         try {
             const queryParams = req.query;
@@ -18,6 +42,30 @@ module.exports = (app) => {
         }
     })
 
+    /**
+     * @openapi
+     * /:orderId:
+     *   get:
+     *     tags:
+     *       - Order
+     *     summary: Retrieve the user from the list
+     *     description: Loads the user from the list
+     *     security:
+     *       - BearerAuth: []
+     *     responses:
+     *       200:
+     *         description: Successfully retrieved the user from
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/User' 
+     *       400:
+     *         description: Bad request
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Internal server error
+     */
     router.get('/:userId', async(req, res, next) => {
         try {
             const {userId} = req.params;
@@ -29,6 +77,30 @@ module.exports = (app) => {
         }
     })
 
+    /**
+     * @openapi
+     * /:userId:
+     *   put:
+     *     tags:
+     *       - User
+     *     summary: Update the user in the list
+     *     description: Update currently authenticated user in the list
+     *     security:
+     *       - BearerAuth: []
+     *     responses:
+     *       200:
+     *         description: Successfully updated user in the list
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/User' 
+     *       400:
+     *         description: Bad request
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Internal server error
+     */
     router.put('/:userId', async(req, res, next) => {
         try {
             const {userId} = req.params;
@@ -41,6 +113,37 @@ module.exports = (app) => {
         }
     })
 
+        /**
+     * @openapi
+     * /:userId:
+     *   delete:
+     *     tags:
+     *       - User
+     *     summary: Delete an user from the list
+     *     description: Deletes currently authenticated user from the list 
+     *     security:
+     *       - BearerAuth: []
+     *     requestBody:
+     *       description: The user to be deleted from the list
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             $ref: '#/components/schemas/User'
+     *     responses:
+     *       200:
+     *         description: Successfully deleted user from the list 
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/User'
+     *       400:
+     *         description: Bad request
+     *       401:
+     *         description: Unauthorized
+     *       500:
+     *         description: Internal server error
+     */
     router.delete('/:userId', async(req, res, next) => {
         try {
             const {userId} = req.params;
