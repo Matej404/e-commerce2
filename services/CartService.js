@@ -61,4 +61,35 @@ module.exports = class CartService {
             throw err;
         }
     }
+
+    async checkout(cartId, userId, paymentInfo) {
+        try {
+    
+          const stripe = require('stripe-checkout')('your_stripe_api_key_here');
+    
+          const cartItems = await CartItemModel.find(cartId);
+    
+          const total = cartItems.reduce((total, item) => {
+            return total += Number(item.price);
+          }, 0);
+    
+          const Order = new OrderModel({ total, userId });
+          Order.addItems(cartItems);
+          await Order.create();
+    
+          const charge = await stripe.charges.create({
+            amount: total,
+            currency: 'usd',
+            source: paymentInfo.id,
+            description: 'Codecademy Charge'
+          });
+    
+          const order = Order.update({ status: 'COMPLETE' });
+    
+          return order;
+    
+        } catch(err) {
+          throw err;
+        }
+      }
 }

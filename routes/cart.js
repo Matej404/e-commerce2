@@ -211,4 +211,18 @@ module.exports = (app) => {
             next(err);
         }
     })
+
+    router.post('/mine/checkout', async (req, res, next) => {
+        try {
+          const { id } = req.user;
+    
+          const { cartId, paymentInfo } = req.body; 
+    
+          const response = await CartServiceInstance.checkout(cartId, id, paymentInfo);
+    
+          res.status(200).send(response);
+        } catch(err) {
+          next(err);
+        }
+      });
 }
