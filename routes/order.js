@@ -44,7 +44,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * order/:orderId:
+     * order/{orderId}:
      *   get:
      *     tags:
      *       - Order
@@ -80,7 +80,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /:orderId:
+     * /{orderId}:
      *   post:
      *     tags:
      *       - Order
@@ -123,7 +123,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /:orderId:
+     * /{orderId}:
      *   put:
      *     tags:
      *       - Order
@@ -167,7 +167,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /:orderItemId:
+     * /{orderItemId}:
      *   delete:
      *     tags:
      *       - Order

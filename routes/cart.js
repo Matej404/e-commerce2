@@ -127,7 +127,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /mine/item/cartItemId:
+     * /mine/item/{cartItemId}:
      *   put:
      *     tags:
      *       - Cart
@@ -156,7 +156,7 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
-    router.put('/mine/item/cartItemId', async (req, res, next) => {
+    router.put('/mine/item/:cartItemId', async (req, res, next) => {
         try {
             const { cartItemId } = req.params;
             const data = req.body;
@@ -171,7 +171,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /mine/item/createItemId:
+     * /mine/item/{createItemId}:
      *   delete:
      *     tags:
      *       - Cart
@@ -200,7 +200,7 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
-    router.delete('/mine/item/createItemId', async (req, res, next) => {
+    router.delete('/mine/item/:createItemId', async (req, res, next) => {
         try {
             const { createItemId } = req.params;
 

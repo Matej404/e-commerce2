@@ -44,7 +44,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /:orderId:
+     * /{orderId}:
      *   get:
      *     tags:
      *       - User
@@ -79,7 +79,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /:userId:
+     * /{userId}:
      *   put:
      *     tags:
      *       - User
@@ -115,7 +115,7 @@ module.exports = (app) => {
 
         /**
      * @openapi
-     * /:userId:
+     * /{userId}:
      *   delete:
      *     tags:
      *       - User
