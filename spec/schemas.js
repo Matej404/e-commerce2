@@ -80,5 +80,18 @@ module.exports = {
         description: 'The price of the product in GBP'
       }
     }
+  },
+  Auth: {
+    type: 'object',
+    properties: {
+      email: {
+        type: 'string',
+        description: 'The email address of the user'
+      },
+      password: {
+        type: 'string',
+        description: 'The password of the user'
+      }
+    }
   }
 };
