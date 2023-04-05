@@ -2,10 +2,8 @@
 const express = require('express');
 const app = express();
 
-// Configure swagger
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./spec/swagger.js');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const loaders = require('./loaders/express');
+
 
 // Listen on port 3000
 app.listen(3000, () => {  console.log('Express server running on port 3000!') });
