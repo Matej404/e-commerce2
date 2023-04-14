@@ -8,29 +8,50 @@ module.exports = (app, passport) => {
   app.use('/auth', router);
 
 /**
+ * Register a new user account
+ *
  * @swagger
  * /register:
  *   post:
- *     summary: Register a new user
- *     description: Registers a new user with the provided information
- *     requestBody:
- *       description: The user information to be registered
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Auth'
+ *     summary: Register a new user account
+ *     description: Creates a new user account using the provided user data.
+ *     tags:
+ *       - Registration
+ *     parameters:
+ *       - in: body
+ *         name: user
+ *         description: User object containing registration details
+ *         required: true
+ *         schema:
+ *           $ref: '#/components/schemas/User'
  *     responses:
- *       201:
- *         description: Registration successful
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/User'
- *       400:
- *         description: Invalid request body
- *       409:
- *         description: User already exists
+ *       '201':
+ *         description: User account created successfully
+ *         schema:
+ *           $ref: '#/components/schemas/User'
+ *       '400':
+ *         description: Bad request, missing or invalid parameters
+ *       '500':
+ *         description: Internal server error
+ * definitions:
+ *   User:
+ *     type: object
+ *     required:
+ *       - email
+ *       - username
+ *       - password
+ *     properties:
+ *       email:
+ *         type: string
+ *         format: email
+ *         description: Email address of the user
+ *       username:
+ *         type: string
+ *         description: Username of the user
+ *       password:
+ *         type: string
+ *         format: password
+ *         description: Password of the user
  */
   router.post('/register', async (req, res, next) => {
     try {
@@ -44,31 +65,59 @@ module.exports = (app, passport) => {
     }
   });
 
-  /**
- * Logs in a user with the given credentials.
+/**
+ * Login a user
  *
  * @swagger
- * /auth/login:
+ * /login:
  *   post:
- *     summary: Logs in a user.
+ *     summary: Login a user
+ *     description: Authenticates a user using their username (or email) and password.
  *     tags:
  *       - Authentication
- *     requestBody:
- *       description: User credentials.
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Auth'
+ *     parameters:
+ *       - in: body
+ *         name: credentials
+ *         description: User credentials (username or email and password)
+ *         required: true
+ *         schema:
+ *           $ref: '#/components/schemas/Auth'
  *     responses:
  *       '200':
- *         description: OK.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/User'
+ *         description: User authenticated successfully
+ *         schema:
+ *           $ref: '#/components/schemas/User'
  *       '401':
- *         description: Unauthorized.
+ *         description: Unauthorized, invalid credentials
+ *       '500':
+ *         description: Internal server error
+ * definitions:
+ *   Credentials:
+ *     type: object
+ *     required:
+ *       - email
+ *       - password
+ *     properties:
+ *       email:
+ *         type: string
+ *         description: Username or email of the user
+ *       password:
+ *         type: string
+ *         format: password
+ *         description: Password of the user
+ *   User:
+ *     type: object
+ *     required:
+ *       - id
+ *       - email
+ *     properties:
+ *       id:
+ *         type: string
+ *         description: User ID
+ *       email:
+ *         type: string
+ *         format: email
+ *         description: Email address of the user
  */
   router.post('/login', passport.authenticate('local'), async (req, res, next) => {
     try {
