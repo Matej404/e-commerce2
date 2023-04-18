@@ -11,7 +11,7 @@ module.exports = (app, passport) => {
  * Register a new user account
  *
  * @swagger
- * /register:
+ * /auth/register:
  *   post:
  *     summary: Register a new user account
  *     description: Creates a new user account using the provided user data.
@@ -69,7 +69,7 @@ module.exports = (app, passport) => {
  * Login a user
  *
  * @swagger
- * /login:
+ * /auth/login:
  *   post:
  *     summary: Login a user
  *     description: Authenticates a user using their username (or email) and password.
