@@ -1,5 +1,5 @@
 const pgp = require('pg-promise');
-const client = require('../databasepg');
+const client = require('../db');
 
 
 module.exports = class OrderItemModel {
