@@ -16,19 +16,21 @@ module.exports = (app, passport) => {
  *     summary: Register a new user account
  *     description: Creates a new user account using the provided user data.
  *     tags:
- *       - Registration
+ *       - Auth
  *     parameters:
  *       - in: body
- *         name: user
- *         description: User object containing registration details
+ *         name: credentials
+ *         description: User credentials (username or email and password)
  *         required: true
  *         schema:
- *           $ref: '#/components/schemas/User'
+ *           $ref: '#/components/schemas/Auth'
  *     responses:
  *       '201':
  *         description: User account created successfully
- *         schema:
- *           $ref: '#/components/schemas/User'
+ *         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/User'
  *       '400':
  *         description: Bad request, missing or invalid parameters
  *       '500':
@@ -74,7 +76,7 @@ module.exports = (app, passport) => {
  *     summary: Login a user
  *     description: Authenticates a user using their username (or email) and password.
  *     tags:
- *       - Authentication
+ *       - Auth
  *     parameters:
  *       - in: body
  *         name: credentials

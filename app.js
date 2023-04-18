@@ -3,8 +3,16 @@ const express = require('express');
 const app = express();
 
 const loaders = require('./loaders');
-const bodyParser = require('body-parser');
+const { PORT } = require('./config');
 
-loaders(app);
-// Listen on port 3000
-app.listen(3000, () => {  console.log('Express server running on port 3000!') });
+async function startServer() {
+    // Init application loaders
+    loaders(app);
+
+    // Start server
+    app.listen(PORT, () => {
+        console.log(`Server listening on PORT ${PORT}`);
+    })
+}
+
+startServer();
