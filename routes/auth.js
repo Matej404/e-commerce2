@@ -61,7 +61,7 @@ module.exports = (app, passport) => {
 
 
       const response = await AuthServiceInstance.register(data);
-      res.status(201).send(response);
+      res.status(200).send(response);
     } catch(err) {
       next(err);
     }

@@ -6,11 +6,11 @@ const CartService = require('../services/CartService');
 const CartServiceInstance = new CartService();
 
 module.exports = (app) => {
-    app.use('carts', router);
+    app.use('/carts', router);
 
     /**
      * @openapi
-     * /mine:
+     * /carts/mine:
      *   get:
      *     tags:
      *       - Cart
@@ -45,7 +45,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /mine:
+     * /carts/mine:
      *   post:
      *     tags:
      *       - Cart
@@ -82,7 +82,7 @@ module.exports = (app) => {
     
     /**
      * @openapi
-     * /mine/item:
+     * /carts/mine/item:
      *   post:
      *     tags:
      *       - Cart
@@ -127,7 +127,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /mine/item/{cartItemId}:
+     * /carts/mine/item/{cartItemId}:
      *   put:
      *     tags:
      *       - Cart
@@ -171,7 +171,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /mine/item/{createItemId}:
+     * /carts/mine/item/{createItemId}:
      *   delete:
      *     tags:
      *       - Cart

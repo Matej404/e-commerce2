@@ -41,9 +41,11 @@ module.exports = class UserModel {
 
     async create(data) {
         try {
-            const {userId} = data;
 
-            const statement = pgp.helpers.insert(userId, null, 'users') + 'RETURNING *';
+            const data = { email, password };               
+            const columns = ['email', 'password'];
+
+            const statement = pgp.helpers.insert(data, columns, 'users') + 'RETURNING *';
             const result = await client.query(statement);
 
             if(result.rows?.length) {

@@ -80,7 +80,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /{orderId}:
+     * /order:
      *   post:
      *     tags:
      *       - Order
@@ -123,7 +123,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /{orderId}:
+     * /order/{orderId}:
      *   put:
      *     tags:
      *       - Order
@@ -167,7 +167,7 @@ module.exports = (app) => {
 
     /**
      * @openapi
-     * /{orderItemId}:
+     * /order/{orderItemId}:
      *   delete:
      *     tags:
      *       - Order
