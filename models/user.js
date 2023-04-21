@@ -40,8 +40,7 @@ module.exports = class UserModel {
     }
 
     async create(data) {
-        try {
-            //const data = { email, password };               
+        try {               
             const columns = ['email', 'password'];
 
             const statement = pgp.helpers.insert(data, columns, 'users') + 'RETURNING *';
