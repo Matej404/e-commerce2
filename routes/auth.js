@@ -57,8 +57,10 @@ module.exports = (app, passport) => {
  */
   router.post('/register', async (req, res, next) => {
     try {
-      const data = req.body;
-
+      //const data = req.body;
+      const email = req.body.email;
+      const password = req.body.password;
+      const data = { email, password }; 
 
       const response = await AuthServiceInstance.register(data);
       res.status(200).send(response);
