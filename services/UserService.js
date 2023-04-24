@@ -3,9 +3,9 @@ const UserModel = require('../models/user');
 const UserModelInstance = new UserModel;
 
 module.exports = class UserService {
-    async list(options) {
+    async list() {
         try {
-            const products = await UserModelInstance.find(options);
+            const products = await UserModelInstance.find();
 
             return products;
 
@@ -31,6 +31,7 @@ module.exports = class UserService {
 
 
     async update(data) {
+        console.log(data);
         try {
             const user = await UserModelInstance.update(data);
 

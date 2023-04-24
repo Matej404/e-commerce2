@@ -33,8 +33,8 @@ module.exports = (app) => {
      */
     router.get('/', async(req, res, next) => {
         try {
-            const queryParams = req.query;
-            const response = await UserServiceInstance.list(queryParams);
+     
+            const response = await UserServiceInstance.list();
 
             res.status(200).send(response)
         } catch(arr) {
@@ -101,10 +101,13 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
+
+    //NOT WORKING: "Error: error: invalid input syntax for type json". It
     router.put('/:userId', async(req, res, next) => {
         try {
             const {userId} = req.params;
             const data = req.body;
+            console.log(data);
             const response = await UserServiceInstance.update({id: userId, ...data});
 
             res.status(200).send(response);

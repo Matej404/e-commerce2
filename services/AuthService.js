@@ -4,7 +4,7 @@ const UserModelInstance = new UserModel();
 
 module.exports = class AuthService {
     async register(data) {
-
+      console.log(data);
         const { email } = data;
     
         try {
