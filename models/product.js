@@ -1,12 +1,12 @@
 const client = require('../db');
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')({ capSQL: true });
 
 module.exports = class ProductModel {
     
-    async find(options = {}) {
+    async find() {
         try {
             const statement = `SELECT *
-                               FROM product`;
+                               FROM products`;
     
             const values = [];
     
@@ -25,7 +25,7 @@ module.exports = class ProductModel {
     async findOne(id) {
         try {
             const statement = `SELECT *
-                                FROM product
+                                FROM products
                                 WHERE id = $1`;
 
             const values = [id];
@@ -42,12 +42,10 @@ module.exports = class ProductModel {
                 throw(err);
             }
     }
-
+    //OVAJ OBJEKT
     async create(data) {
         try {
-            const {productId} = data; 
-
-            const statement = pgp.helpers.insert(productId, null, 'product') + 'RETURNING *';
+            const statement = pgp.helpers.insert(data, null, 'products') + 'RETURNING *';
             const result = await client.query(statement);
 
             if(result.rows?.length) {
@@ -65,7 +63,7 @@ module.exports = class ProductModel {
             const {id, ...params} = data;
 
             const condition = pgp.as.format('WHERE id = ${id} RETURNING *', {id});
-            const statement = pgp.helpers.update(params, null, 'product') + condition;
+            const statement = pgp.helpers.update(params, null, 'products') + condition;
             const result = await client.query(statement);
 
             if(result.rows?.length) {
@@ -80,7 +78,7 @@ module.exports = class ProductModel {
     async delete(id) {
         try {
           const statement = `DELETE
-                             FROM "product"
+                             FROM "products"
                              WHERE id = $1
                              RETURNING *`;
           const values = [id];

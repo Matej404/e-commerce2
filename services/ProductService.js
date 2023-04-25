@@ -3,9 +3,9 @@ const ProductModel = require('../models/product');
 const ProductModelInstance = new ProductModel();
 
 module.exports = class ProductService {
-    async list(options) {
+    async list() {
         try {
-            const products = await ProductModelInstance.find(options);
+            const products = await ProductModelInstance.find();
 
             return products;
 
@@ -29,12 +29,11 @@ module.exports = class ProductService {
             throw(err);
         }
     }
-
+    
     async create(data) {
-        const { productId } = data;
 
         try {
-            const product = await ProductModelInstance.create(productId);
+            const product = await ProductModelInstance.create(data);
 
             return product;
         } catch(err) {
@@ -48,7 +47,7 @@ module.exports = class ProductService {
             
             return product;
         } catch(err) {
-            next(err);
+            throw(err);
         }
     }
 

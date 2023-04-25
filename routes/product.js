@@ -5,7 +5,7 @@ const ProductService = require('../services/ProductService');
 const ProductServiceInstance = new ProductService();
 
 module.exports = (app) => {
-    app.use('/product', router);
+    app.use('/products', router);
 
     /**
      * @openapi
@@ -33,9 +33,7 @@ module.exports = (app) => {
      */
     router.get('/', async(req, res, next) => {
         try {
-            const queryParams = req.query;
-
-            const response = await ProductServiceInstance.list(queryParams);
+            const response = await ProductServiceInstance.list();
             res.status(200).send(response)
         } catch(err) {
             next(err);
@@ -69,7 +67,7 @@ module.exports = (app) => {
      */
     router.get('/:productId', async(req, res, next) => {
         try {
-            const {productId} = req.query;
+            const {productId} = req.params;
 
             const response = await ProductServiceInstance.get(productId);
     
@@ -105,9 +103,9 @@ module.exports = (app) => {
      */
     router.post('/', async(req, res, next) => {
         try {
-            const { productId } = req.product;
+            const data = req.body;
 
-            const response = await ProductServiceInstance.get(productId)
+            const response = await ProductServiceInstance.create(data);
 
             res.status(200).send(response)
         } catch(err) {

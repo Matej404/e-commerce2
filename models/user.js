@@ -61,7 +61,6 @@ module.exports = class UserModel {
     async update(data) {
         try {
             const {id, ...params} = data;
-            const formattedData = pgp.as.format(`'${JSON.stringify(data)}'::json`);
 
             const condition = pgp.as.format('WHERE id = ${id} RETURNING *', {id});
             const statement = pgp.helpers.update(params, null, 'users') + condition;

@@ -102,7 +102,7 @@ module.exports = (app) => {
      *         description: Internal server error
      */
 
-    //NOT WORKING: "Error: error: invalid input syntax for type json". It
+    //NOT WORKING: "Error: error: invalid input syntax for type json". It has to be fixed
     router.put('/:userId', async(req, res, next) => {
         try {
             const {userId} = req.params;

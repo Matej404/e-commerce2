@@ -5,9 +5,9 @@ const UserModelInstance = new UserModel;
 module.exports = class UserService {
     async list() {
         try {
-            const products = await UserModelInstance.find();
+            const users = await UserModelInstance.find();
 
-            return products;
+            return users;
 
         } catch(err) {
             throw err;
