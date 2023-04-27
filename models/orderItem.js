@@ -5,9 +5,8 @@ const client = require('../db');
 module.exports = class OrderItemModel {
     async create(data) {
         try {
-            const data = {userId};
 
-            const statement = pgp.helpers.insert(userId, null, 'orders') + 'RETURNING *';
+            const statement = pgp.helpers.insert(data, null, 'orderItems') + 'RETURNING *';
             
             const result = await client.query(statement);
 

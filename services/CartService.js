@@ -20,8 +20,9 @@ module.exports = class CartService {
     }
 
     async create(data) {
+        const {userId} = data;
+        
         try {
-            const {userId} = data;
 
             const cart = await new CartItemModelInstance.create(userId);
 

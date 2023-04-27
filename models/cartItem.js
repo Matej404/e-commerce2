@@ -29,7 +29,7 @@ module.exports = class cartItemModel {
 
     async create(data) {
         try {
-            const statement = pgp.helpers.insert(data, null, 'cartItem') + 'RETURNING *';
+            const statement = pgp.helpers.insert(data, null, 'cartItems') + 'RETURNING *';
             const result = client.query(statement);
 
             if(result.rows?.length) {

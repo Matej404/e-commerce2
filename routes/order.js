@@ -117,7 +117,7 @@ module.exports = (app) => {
 
             res.status(200).send(response)
         } catch(err) {
-            throw err;
+            next(err);
         }
     })
 

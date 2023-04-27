@@ -69,9 +69,10 @@ module.exports = (app) => {
      */
     router.post('/mine', async (req, res, next) => {
         try {
-            const { userId } = req.user;
+            const { id } = req.user;
+            console.log(req.user);
 
-            const response = await CartServiceInstance.create({ id: userId });
+            const response = await CartServiceInstance.create({ userId: id });
 
             res.status(200).send(response)
         } catch (err) {
@@ -161,7 +162,7 @@ module.exports = (app) => {
             const { cartItemId } = req.params;
             const data = req.body;
 
-            const response = await CartServiceInstance.updateItem(cartItemId);
+            const response = await CartServiceInstance.updateItem(cartItemId, data);
             res.status(200).send(response)
         } catch (err) {
             next(err);

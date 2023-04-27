@@ -23,7 +23,7 @@ module.exports = class CartModel {
 
     async create(userId) {
         try {
-            const data = {userId, ...this};
+            const data = {userId};
 
             const statement = pgp.helpers.insert(data, null, 'carts') + 'RETURNING *';
 
