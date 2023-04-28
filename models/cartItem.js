@@ -1,5 +1,5 @@
 const client = require('../db');
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')({ capSQL: true });
 
 module.exports = class cartItemModel {
     async find(cartId) {
@@ -14,7 +14,7 @@ module.exports = class cartItemModel {
 
          const values = [cartId];
 
-         const result = client.query(statement, values);
+         const result = await client.query(statement, values);
 
          if(result.rows?.length) {
             return result.rows[0];
@@ -30,7 +30,7 @@ module.exports = class cartItemModel {
     async create(data) {
         try {
             const statement = pgp.helpers.insert(data, null, 'cartItems') + 'RETURNING *';
-            const result = client.query(statement);
+            const result = await client.query(statement);
 
             if(result.rows?.length) {
                 return result.rows[0];
@@ -46,7 +46,7 @@ module.exports = class cartItemModel {
         try {
             const condition = pgp.as.format('WHERE id = ${id} * RETURNING', {id});
             const statement = pgp.helpers.update(data, null, 'cartsItems') + condition;
-            const result = client.require(statement);
+            const result = await client.require(statement);
 
             if(result.rows?.length) {
                 return result.rows[0];
@@ -67,7 +67,7 @@ module.exports = class cartItemModel {
 
         const values = [id];
 
-        const result = client.query(statement, values);
+        const result = await client.query(statement, values);
 
         if(result.rows?.length) {
             return result.rows[0];

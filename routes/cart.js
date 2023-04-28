@@ -32,9 +32,12 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
+
+    //NEED TO BE FIXED
     router.get('/mine', async (req, res, next) => {
         try {
             const { id } = req.user;
+            console.log(req.user)
             const response = await CartServiceInstance.loadCart(id)
 
             res.status(200).send(response);
@@ -67,10 +70,12 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
+
+    //IT WORKS, CREATES NEW CART
     router.post('/mine', async (req, res, next) => {
         try {
             const { id } = req.user;
-            console.log(req.user);
+            console.log(req.user)
 
             const response = await CartServiceInstance.create({ userId: id });
 

@@ -7,9 +7,10 @@ const CartItemModelInstance = new CartItemModel();
 
 module.exports = class CartService {
     async loadCart(userId) {
+        console.log(userId)
         try {
-            const cart = await CartModel.findOneByUser(userId);
-            const items = await CartItemModel.find(cart.id);
+            const cart = await CartModelInstance.findOneByUser(userId);
+            const items = await CartItemModelInstance.find(cart.id);
 
             cart.items = items;
             return cart;
@@ -20,11 +21,12 @@ module.exports = class CartService {
     }
 
     async create(data) {
+        console.log(data)
         const {userId} = data;
-        
+
         try {
 
-            const cart = await new CartItemModelInstance.create(userId);
+            const cart = await CartModelInstance.create(userId);
 
             return cart;
         } catch(err) {
@@ -34,8 +36,8 @@ module.exports = class CartService {
 
     async addItem(userId, item) {
         try {
-            const cart = CartModelInstance.findOneByUser(userId);
-            const cartItem = await CartItemModelInstance.create({cartId: cart.id, ...item});
+            const cart = await CartModelInstance.findOneByUser(userId);
+            const cartItem = await CartItemModelInstance.create({userId: cart.id, ...item});
 
             return cartItem;
         } catch(err) {
