@@ -33,7 +33,7 @@ module.exports = (app) => {
      *         description: Internal server error
      */
 
-    //NEED TO BE FIXED
+    //IT WORKS, RETURS USER'S CART
     router.get('/mine', async (req, res, next) => {
         try {
             const { id } = req.user;

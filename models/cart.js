@@ -7,7 +7,6 @@ module.exports = class CartModel {
             const statement = `SELECT *
                                FROM carts
                                WHERE "userId" = $1`;
-                               console.log(statement)
 
             const values = [userId];
 

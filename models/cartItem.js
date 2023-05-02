@@ -8,9 +8,9 @@ module.exports = class cartItemModel {
                                ci.qty,
                                ci.id AS "cartItemId", 
                                p.*
-                               FROM "cartItems" ci
+                               FROM "cartitems" ci
                                INNER JOIN products p ON p.id = ci."productId"
-                               WHERE "cartId" = $1`;
+                               WHERE "cartid" = $1`;
 
          const values = [cartId];
 
