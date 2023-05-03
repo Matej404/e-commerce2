@@ -37,7 +37,6 @@ module.exports = (app) => {
     router.get('/mine', async (req, res, next) => {
         try {
             const { id } = req.user;
-            console.log(req.user)
             const response = await CartServiceInstance.loadCart(id)
 
             res.status(200).send(response);
@@ -75,7 +74,6 @@ module.exports = (app) => {
     router.post('/mine', async (req, res, next) => {
         try {
             const { id } = req.user;
-            console.log(req.user)
 
             const response = await CartServiceInstance.create({ userId: id });
 
@@ -117,6 +115,8 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
+
+    //IT WORKS, CREATES NEW ITEM IN THE CART
     router.post('/mine/item', async (req, res, next) => {
         try {
             const { id } = req.user;
@@ -162,10 +162,12 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
+
+    //IT WORKS, UPDATES AN ITEM IN THE CART
     router.put('/mine/item/:cartItemId', async (req, res, next) => {
         try {
             const { cartItemId } = req.params;
-            const data = req.body;
+            const data = req.body
 
             const response = await CartServiceInstance.updateItem(cartItemId, data);
             res.status(200).send(response)
@@ -206,11 +208,13 @@ module.exports = (app) => {
      *       500:
      *         description: Internal server error
      */
-    router.delete('/mine/item/:createItemId', async (req, res, next) => {
-        try {
-            const { createItemId } = req.params;
 
-            const response = new CartServiceInstance.removeItem(createItemId)
+    //IT WORKS, DELETES AN ITEM FROM THE CART
+    router.delete('/mine/item/:cartItemId', async (req, res, next) => {
+        try {
+            const { cartItemId } = req.params;
+
+            const response = await CartServiceInstance.removeItem(cartItemId)
 
             res.status(200).send(response);
         } catch (err) {

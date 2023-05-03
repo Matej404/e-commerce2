@@ -29,7 +29,9 @@ module.exports = class cartItemModel {
 
     async create(data) {
         try {
-            const statement = pgp.helpers.insert(data, null, 'cartItems') + 'RETURNING *';
+            const columns = ['cartid', 'productId', 'qty'];
+
+            const statement = pgp.helpers.insert(data, columns, 'cartitems') + 'RETURNING *';
             const result = await client.query(statement);
 
             if(result.rows?.length) {
@@ -44,9 +46,9 @@ module.exports = class cartItemModel {
 
     async update(id, data) {
         try {
-            const condition = pgp.as.format('WHERE id = ${id} * RETURNING', {id});
-            const statement = pgp.helpers.update(data, null, 'cartsItems') + condition;
-            const result = await client.require(statement);
+            const condition = pgp.as.format('WHERE id = ${id} RETURNING *', {id});
+            const statement = pgp.helpers.update(data, null, 'cartitems') + condition;
+            const result = await client.query(statement);
 
             if(result.rows?.length) {
                 return result.rows[0];
@@ -60,8 +62,8 @@ module.exports = class cartItemModel {
     }
 
     async delete(id) {
-        const statement = `DELETE *
-                           from 'cartItems
+        const statement = `DELETE
+                           FROM "cartitems"
                            WHERE id = $1
                            RETURNING *`;
 

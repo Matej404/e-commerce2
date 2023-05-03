@@ -30,7 +30,6 @@ module.exports = class CartModel {
             }
 
             const statement = pgp.helpers.insert(data, null, 'carts') + 'RETURNING *';
-            console.log(statement)
 
             const result = await client.query(statement);
 
