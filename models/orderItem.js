@@ -5,56 +5,42 @@ const client = require('../db');
 module.exports = class OrderItemModel {
     async create(data) {
         try {
-
-            const statement = pgp.helpers.insert(data, null, 'orderItems') + 'RETURNING *';
-            
-            const result = await client.query(statement);
-
-            if(result.rows?.length) {
-                return result.rows[0];
-            }
-            return null;
-
-        } catch(err) {
-            return 
-        }
-    }
-
-    async update(id, data) {
-        try {
-            const condition = pgp.as.format('WHERE id = $id RETURNING *', {id});
-            const statement = pgp.helpers.update(data, null, 'orders') + condition;
-
-            const result = await client.query(statement);
-
-            if(result.rows?.length) {
-                return result.rows[0];
-            }
+          const statement = pgp.helpers.insert(data, null, 'orderItems') + 'RETURNING *';
+     
+          const result = await client.query(statement);
+    
+          if (result.rows?.length) {
             return result.rows[0];
-
+          }
+    
+          return null;
+    
         } catch(err) {
-            throw new Error(err);
+          throw new Error(err);
         }
-    }
-    async delete(id) {
+      }
+
+      async find(orderId) {
         try {
-            const statement = `SELECT *
-                               FROM "orderItems"
-                               WHERE id = $id
-                               RETURNING *`;
-
-             const values = [id];
-
-             const result = client.query(statement, values);
-
-             if(result.rows?.length) {
-                return result.rows[0];
-             }
-
-             return null;
-             
+          const statement = `SELECT 
+                                oi.qty,
+                                oi.id AS "cartItemId", 
+                                p.*
+                             FROM "orderItems" oi
+                             INNER JOIN products p ON p.id = oi."productId"
+                             WHERE "orderId" = $1`
+          const values = [orderId];
+      
+          const result = await client.query(statement, values);
+    
+          if (result.rows?.length) {
+            return result.rows;
+          }
+    
+          return [];
+    
         } catch(err) {
-            throw new Error(err);
+          throw new Error(err);
         }
-    }
+      }
 }

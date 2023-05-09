@@ -1,8 +1,10 @@
 const createError = require('http-errors');
 const CartModel = require('../models/cart');
+const OrderModel = require('../models/order');
 const CartItemModel = require('../models/cartItem');
 
 const CartModelInstance = new CartModel();
+const OrderModelInctance = new OrderModel();
 const CartItemModelInstance = new CartItemModel();
 
 module.exports = class CartService {
@@ -68,13 +70,13 @@ module.exports = class CartService {
     
           const stripe = require('stripe-checkout')('your_stripe_api_key_here');
     
-          const cartItems = await CartItemModel.find(cartId);
+          const cartItems = await CartItemModelInstance.find(cartId);
     
           const total = cartItems.reduce((total, item) => {
             return total += Number(item.price);
           }, 0);
     
-          const Order = new OrderModel({ total, userId });
+          const Order = OrderModelInctance({ total, userId });
           Order.addItems(cartItems);
           await Order.create();
     

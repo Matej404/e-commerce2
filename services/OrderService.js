@@ -27,10 +27,13 @@ module.exports = class OrderService {
     }
 
     async create(data) {
-        try {
-            const {orderId} = data;
 
-            const order = await OrderItemModelInstance.create(orderId);
+        const {userId} = data;
+
+        try {
+            
+
+            const order = await OrderModelInstance.create({ userId });
 
             return order;
 
@@ -41,7 +44,7 @@ module.exports = class OrderService {
 
     async update(oredrId, data) {
         try {
-            const orderItem = await OrderItemModelInstance.update(oredrId, data);
+            const orderItem = await OrderModelInstance.update(oredrId, data);
 
             return orderItem;
 
