@@ -1,7 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const GoogleStrategy = require('passport-google-oidc').Strategy;
 const AuthService = require('../services/AuthService');
 const AuthServiceInstance = new AuthService();
+const { GOOGLE } = require('../config');
 
 module.exports = (app) => {
 
@@ -26,6 +28,21 @@ module.exports = (app) => {
       }
     }
   ));
+
+  passport.use(new GoogleStrategy({
+    clientID: GOOGLE.CONSUMER_KEY,
+    clientSecret: GOOGLE.CONSUMER_SECRET,
+    callbackURL: GOOGLE.CALLBACK_URL
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    try {
+      const user = await AuthServiceInstance.googleLogin(profile);
+      return done(null, user);
+    } catch(err) {
+      return done(err);
+    }
+  }
+));
 
   return passport;
 

@@ -112,4 +112,22 @@ module.exports = class UserModel {
           throw new Error(err);
         }
       }
+
+      async findOneByGoogleId(id) {
+        try {
+            const statement = `SELECT *
+                               FROM user
+                               WHERE google ->> 'id' = 1$`;
+
+            const values = [id];
+
+            const result = await client.query(statement, values);
+
+            if(result.rows?.length) {
+                return result.rows[0];
+            }
+        } catch(err) {
+            throw new Error(err);
+        }
+      }
 }

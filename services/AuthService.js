@@ -45,4 +45,21 @@ module.exports = class AuthService {
         }
     
       };
+
+      async googleLogin(profile) {
+        const { id, displayName } = profile;
+
+        try {
+          const user = await UserModelInstance.findOneByGoogleId(id);
+
+          if(!user) {
+            return await UserModelInstance.create({ googl: { id, displayName } });
+          }
+
+          return user
+
+        } catch(err) {
+          throw createError(500, err);
+        }
+      }
 }
