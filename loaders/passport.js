@@ -1,9 +1,10 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const GoogleStrategy = require('passport-google-oidc').Strategy;
+const FacebookStrategy = require('passport-facebook');
 const AuthService = require('../services/AuthService');
 const AuthServiceInstance = new AuthService();
-const { GOOGLE } = require('../config');
+const { GOOGLE, FACEBOOK } = require('../config');
 
 module.exports = (app) => {
 
@@ -43,6 +44,22 @@ module.exports = (app) => {
     }
   }
 ));
+
+passport.use(new FacebookStrategy({
+  clientID: FACEBOOK.CONSUMER_KEY,
+  clientSecret: FACEBOOK.CONSUMER_SECRET,
+  callbackURL: FACEBOOK.CALLBACK_URL
+},
+async(accessToken, refreshToken, profile, done) => {
+  try { 
+    const user = await AuthServiceInstance.facebookLogin(profile);
+
+    done(null, user)
+  } catch(err) {
+    done(null)
+  }
+}
+))
 
   return passport;
 

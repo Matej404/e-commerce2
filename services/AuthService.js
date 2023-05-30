@@ -62,4 +62,20 @@ module.exports = class AuthService {
           throw createError(500, err);
         }
       }
+
+      async facebookLogin(profile) {
+        const { id, displayName } = profile;
+        try {
+          const user = await UserModelInstance.findOneByFacebookId(id);
+
+          if(!user) {
+            return await UserModelInstance.create({facebook: id, displayName});
+          }
+
+          return user;
+
+        } catch(err) {
+          throw createError(500, err);
+        }
+      }
 }

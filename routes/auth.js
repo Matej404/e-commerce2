@@ -145,6 +145,15 @@ module.exports = (app, passport) => {
       res.redirect('/')
     }
   )
+
+  router.get('/facebook', passport.authenticate('facebook'));
+
+  router.get('/facebooh/callback', 
+    passport.authenticate('facebook', { failureRedirect: 'login' }), 
+    async(req, res) => {
+      res.redirect('/');
+     }
+    )
 }
 
 

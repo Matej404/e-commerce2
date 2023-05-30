@@ -130,4 +130,22 @@ module.exports = class UserModel {
             throw new Error(err);
         }
       }
+
+      async findOneByFAcebookId(id) {
+        try {
+            const statement = `SELECT *
+                               FROM user
+                               WHERE facebook ->> id = 1$`;
+
+            const values = [id];
+
+            const result = await client.query(statement, values);
+
+            if(result.rows?.length) {
+                return result.rows[0];
+            }
+        } catch(err) {
+            throw new Error(err);
+        }
+      }
 }
