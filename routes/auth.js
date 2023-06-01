@@ -137,13 +137,14 @@ module.exports = (app, passport) => {
     }
   });
 
-  router.post('/logout', async(req, res, next) => {
-    try {
-      res.redirect('/login')
-    } catch(err) {
-      next(err);
+router.post('/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) { 
+      return next(err); 
     }
-  })
+    res.status(200).json({ message: 'Logged out successfully' });
+  });
+});
 
   router.get('google', passport.authenticate('google', { scope: ['profile'] }));
 
