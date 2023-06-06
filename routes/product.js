@@ -69,7 +69,7 @@ module.exports = (app) => {
         try {
             const {productId} = req.params;
 
-            const response = await ProductServiceInstance.get(productId);
+            const response = await ProductServiceInstance.get({ id: productId });
     
             res.status(200).send(response)
         } catch(err) {

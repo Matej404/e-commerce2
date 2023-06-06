@@ -15,7 +15,8 @@ module.exports = class ProductService {
 
     }
 
-    async get(id) {
+    async get(data) {
+        const { id } = data;
         try {
             const product = await ProductModelInstance.findOne(id);
 
