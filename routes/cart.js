@@ -117,7 +117,7 @@ module.exports = (app) => {
      */
 
     //IT WORKS, CREATES NEW ITEM IN THE CART
-    router.post('/mine/item', async (req, res, next) => {
+    router.post('/mine/items', async (req, res, next) => {
         try {
             const { id } = req.user;
             const data = req.body;
@@ -164,7 +164,7 @@ module.exports = (app) => {
      */
 
     //IT WORKS, UPDATES AN ITEM IN THE CART
-    router.put('/mine/item/:cartItemId', async (req, res, next) => {
+    router.put('/mine/items/:cartItemId', async (req, res, next) => {
         try {
             const { cartItemId } = req.params;
             const data = req.body
@@ -210,7 +210,7 @@ module.exports = (app) => {
      */
 
     //IT WORKS, DELETES AN ITEM FROM THE CART
-    router.delete('/mine/item/:cartItemId', async (req, res, next) => {
+    router.delete('/mine/items/:cartItemId', async (req, res, next) => {
         try {
             const { cartItemId } = req.params;
 
