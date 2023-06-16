@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const AuthService = require('../services/AuthService');
 const AuthServiceInstance = new AuthService();
+const UserService = require('../services/UserService');
+const UserServiceInstance = new UserService();
+const CartService = require('../services/CartService');
+const CartServiceInstance = new CartService();
 
 module.exports = (app, passport) => {
 
@@ -163,6 +167,23 @@ router.post('/logout', (req, res, next) => {
       res.redirect('/');
      }
     )
+
+    router.get('logged_in', async(req, res, next) => {
+      try {
+        const { id } = req.user;
+
+        const user = UserServiceInstance.get({ id });
+        const cart = CartServiceInstance.loadCart(id);
+
+        res.status(200).send({
+          user,
+          loggedIn: true,
+          cart
+        })
+      } catch(err) {
+        next(err);
+      }
+    })
 }
 
 
