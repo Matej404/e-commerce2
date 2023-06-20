@@ -35,9 +35,10 @@ module.exports = class CartService {
     }
 
     async addItem(userId, item) {
+        console.log(userId, item);
         try {
             const cart = await CartModelInstance.findOneByUser(userId);
-            const cartItem = await CartItemModelInstance.create({userId: cart.id, ...item});
+            const cartItem = await CartItemModelInstance.create({cartid: cart.id, ...item});
 
             return cartItem;
         } catch(err) {

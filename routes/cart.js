@@ -116,11 +116,12 @@ module.exports = (app) => {
      *         description: Internal server error
      */
 
-    //IT WORKS, CREATES NEW ITEM IN THE CART
     router.post('/mine/items', async (req, res, next) => {
         try {
             const { id } = req.user;
             const data = req.body;
+            console.log(req.user);
+            console.log(req.body)
 
             const response = await CartServiceInstance.addItem(id, data);
 
